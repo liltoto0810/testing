@@ -1,0 +1,149 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "background": "transparent",
+    "font": "Inter, Arial, sans-serif",
+    "axis": {
+      "labelColor": "#3f4a4f",
+      "titleColor": "#253136",
+      "gridColor": "#e8ecef",
+      "domainColor": "#ccd3d7",
+      "tickColor": "#ccd3d7",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#3f4a4f",
+      "titleColor": "#253136",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "orient": "bottom"
+    },
+    "title": {
+      "fontSize": 16,
+      "fontWeight": 700,
+      "anchor": "start",
+      "color": "#102026",
+      "subtitleColor": "#526166",
+      "subtitleFontSize": 12
+    },
+    "view": {
+      "stroke": null
+    },
+    "range": {
+      "category": [
+        "#264653",
+        "#2a9d8f",
+        "#e9c46a",
+        "#f4a261",
+        "#e76f51",
+        "#6a4c93",
+        "#277da1",
+        "#43aa8b"
+      ]
+    }
+  },
+  "width": "container",
+  "height": 360,
+  "title": {
+    "text": "Top source markets by 2025 arrivals",
+    "subtitle": "Singapore is dominant, but China, Indonesia and India create the largest strategic market block."
+  },
+  "data": {
+    "url": "data/cleaned_arrivals.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.Rank_2025 <= 15"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 6,
+        "height": 12
+      },
+      "encoding": {
+        "y": {
+          "field": "Country_Title",
+          "type": "nominal",
+          "sort": "-x",
+          "title": null
+        },
+        "x": {
+          "field": "Arrivals_2025",
+          "type": "quantitative",
+          "title": "Arrivals",
+          "axis": {
+            "format": "~s"
+          }
+        },
+        "color": {
+          "field": "Region",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 90,
+        "color": "#102026"
+      },
+      "encoding": {
+        "y": {
+          "field": "Country_Title",
+          "type": "nominal",
+          "sort": "-x"
+        },
+        "x": {
+          "field": "Arrivals_2025",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "Country_Title",
+            "title": "Market"
+          },
+          {
+            "field": "Arrivals_2025",
+            "format": ","
+          },
+          {
+            "field": "Share_2025",
+            "format": ".1f",
+            "title": "Share %"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "baseline": "middle",
+        "fontSize": 11,
+        "color": "#253136"
+      },
+      "encoding": {
+        "y": {
+          "field": "Country_Title",
+          "type": "nominal",
+          "sort": "-x"
+        },
+        "x": {
+          "field": "Arrivals_2025",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "Share_2025",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    }
+  ]
+}

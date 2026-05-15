@@ -1,0 +1,163 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "background": "transparent",
+    "font": "Inter, Arial, sans-serif",
+    "axis": {
+      "labelColor": "#3f4a4f",
+      "titleColor": "#253136",
+      "gridColor": "#e8ecef",
+      "domainColor": "#ccd3d7",
+      "tickColor": "#ccd3d7",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#3f4a4f",
+      "titleColor": "#253136",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "orient": "bottom"
+    },
+    "title": {
+      "fontSize": 16,
+      "fontWeight": 700,
+      "anchor": "start",
+      "color": "#102026",
+      "subtitleColor": "#526166",
+      "subtitleFontSize": 12
+    },
+    "view": {
+      "stroke": null
+    },
+    "range": {
+      "category": [
+        "#264653",
+        "#2a9d8f",
+        "#e9c46a",
+        "#f4a261",
+        "#e76f51",
+        "#6a4c93",
+        "#277da1",
+        "#43aa8b"
+      ]
+    }
+  },
+  "width": "container",
+  "height": 360,
+  "title": {
+    "text": "Market recovery matrix: size versus 2019 recovery",
+    "subtitle": "Bubble size shows 2025 arrivals. Markets above zero have surpassed 2019."
+  },
+  "data": {
+    "url": "data/cleaned_arrivals.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.Arrivals_2025 >= 40000"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          4,
+          4
+        ],
+        "color": "#9aa6ac"
+      },
+      "encoding": {
+        "y": {
+          "datum": 0
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "opacity": 0.78
+      },
+      "encoding": {
+        "x": {
+          "field": "Arrivals_2025",
+          "type": "quantitative",
+          "scale": {
+            "type": "sqrt"
+          },
+          "axis": {
+            "format": "~s"
+          },
+          "title": "2025 arrivals (sqrt scale)"
+        },
+        "y": {
+          "field": "Growth_2025_vs_2019",
+          "type": "quantitative",
+          "title": "Growth vs 2019 (%)"
+        },
+        "size": {
+          "field": "Arrivals_2025",
+          "type": "quantitative",
+          "legend": null,
+          "scale": {
+            "range": [
+              40,
+              1800
+            ]
+          }
+        },
+        "color": {
+          "field": "Region",
+          "type": "nominal"
+        },
+        "tooltip": [
+          {
+            "field": "Country_Title",
+            "title": "Market"
+          },
+          {
+            "field": "Arrivals_2025",
+            "format": ","
+          },
+          {
+            "field": "Growth_2025_vs_2019",
+            "format": "+.1f",
+            "title": "vs 2019 %"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.Rank_2025 <= 8 || datum.Growth_2025_vs_2019 > 75"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 7,
+        "dy": -5,
+        "fontSize": 10,
+        "color": "#253136"
+      },
+      "encoding": {
+        "x": {
+          "field": "Arrivals_2025",
+          "type": "quantitative",
+          "scale": {
+            "type": "sqrt"
+          }
+        },
+        "y": {
+          "field": "Growth_2025_vs_2019",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "Country_Title"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "background": "transparent",
+    "font": "Inter, Arial, sans-serif",
+    "axis": {
+      "labelColor": "#3f4a4f",
+      "titleColor": "#253136",
+      "gridColor": "#e8ecef",
+      "domainColor": "#ccd3d7",
+      "tickColor": "#ccd3d7",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#3f4a4f",
+      "titleColor": "#253136",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "orient": "bottom"
+    },
+    "title": {
+      "fontSize": 16,
+      "fontWeight": 700,
+      "anchor": "start",
+      "color": "#102026",
+      "subtitleColor": "#526166",
+      "subtitleFontSize": 12
+    },
+    "view": {
+      "stroke": null
+    },
+    "range": {
+      "category": [
+        "#264653",
+        "#2a9d8f",
+        "#e9c46a",
+        "#f4a261",
+        "#e76f51",
+        "#6a4c93",
+        "#277da1",
+        "#43aa8b"
+      ]
+    }
+  },
+  "width": "container",
+  "height": 450,
+  "title": {
+    "text": "Hotel room capacity by state",
+    "subtitle": "Choropleth map joins the TopoJSON state boundary to cleaned room inventory."
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/malaysia-states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "states"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.Name",
+          "from": {
+            "data": {
+              "url": "data/state_tourism_2025.csv"
+            },
+            "key": "Topo_State",
+            "fields": [
+              "State",
+              "Rooms",
+              "Hotels",
+              "Rooms_per_Hotel",
+              "Total_2025",
+              "AOR_Q4"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "color": {
+          "field": "Rooms",
+          "type": "quantitative",
+          "title": "Rooms",
+          "scale": {
+            "scheme": "tealblues"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "State"
+          },
+          {
+            "field": "Rooms",
+            "format": ","
+          },
+          {
+            "field": "Hotels",
+            "format": ","
+          },
+          {
+            "field": "Rooms_per_Hotel",
+            "format": ".1f",
+            "title": "Rooms per hotel"
+          },
+          {
+            "field": "AOR_Q4",
+            "format": ".1f",
+            "title": "Q4 AOR %"
+          }
+        ]
+      }
+    }
+  ]
+}

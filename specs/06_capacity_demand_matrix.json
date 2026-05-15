@@ -1,0 +1,180 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "background": "transparent",
+    "font": "Inter, Arial, sans-serif",
+    "axis": {
+      "labelColor": "#3f4a4f",
+      "titleColor": "#253136",
+      "gridColor": "#e8ecef",
+      "domainColor": "#ccd3d7",
+      "tickColor": "#ccd3d7",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#3f4a4f",
+      "titleColor": "#253136",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "orient": "bottom"
+    },
+    "title": {
+      "fontSize": 16,
+      "fontWeight": 700,
+      "anchor": "start",
+      "color": "#102026",
+      "subtitleColor": "#526166",
+      "subtitleFontSize": 12
+    },
+    "view": {
+      "stroke": null
+    },
+    "range": {
+      "category": [
+        "#264653",
+        "#2a9d8f",
+        "#e9c46a",
+        "#f4a261",
+        "#e76f51",
+        "#6a4c93",
+        "#277da1",
+        "#43aa8b"
+      ]
+    }
+  },
+  "width": "container",
+  "height": 360,
+  "title": {
+    "text": "Capacity-demand matrix",
+    "subtitle": "Rooms show supply, guest volume shows demand, and colour identifies pressure/utilisation segment."
+  },
+  "data": {
+    "url": "data/state_tourism_2025.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#d4dade",
+        "strokeDash": [
+          5,
+          5
+        ]
+      },
+      "encoding": {
+        "x": {
+          "aggregate": "median",
+          "field": "Rooms",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#d4dade",
+        "strokeDash": [
+          5,
+          5
+        ]
+      },
+      "encoding": {
+        "y": {
+          "aggregate": "median",
+          "field": "Total_2025",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "opacity": 0.78
+      },
+      "encoding": {
+        "x": {
+          "field": "Rooms",
+          "type": "quantitative",
+          "title": "Hotel rooms",
+          "axis": {
+            "format": "~s"
+          }
+        },
+        "y": {
+          "field": "Total_2025",
+          "type": "quantitative",
+          "title": "Total hotel guests",
+          "axis": {
+            "format": "~s"
+          }
+        },
+        "size": {
+          "field": "AOR_Q4",
+          "type": "quantitative",
+          "title": "Q4 AOR",
+          "scale": {
+            "range": [
+              80,
+              1400
+            ]
+          }
+        },
+        "color": {
+          "field": "Demand_Capacity_Segment",
+          "type": "nominal",
+          "title": "Segment"
+        },
+        "tooltip": [
+          {
+            "field": "State"
+          },
+          {
+            "field": "Rooms",
+            "format": ","
+          },
+          {
+            "field": "Total_2025",
+            "format": ","
+          },
+          {
+            "field": "AOR_Q4",
+            "format": ".1f"
+          },
+          {
+            "field": "Guests_per_Room",
+            "format": ".0f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.Rooms_Rank <= 4 || datum.Total_2025_Rank <= 4 || datum.Guests_per_Room_Rank <= 3"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 7,
+        "dy": -7,
+        "fontSize": 10
+      },
+      "encoding": {
+        "x": {
+          "field": "Rooms",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "Total_2025",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "State"
+        }
+      }
+    }
+  ]
+}

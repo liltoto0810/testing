@@ -1,0 +1,168 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "background": "transparent",
+    "font": "Inter, Arial, sans-serif",
+    "axis": {
+      "labelColor": "#3f4a4f",
+      "titleColor": "#253136",
+      "gridColor": "#e8ecef",
+      "domainColor": "#ccd3d7",
+      "tickColor": "#ccd3d7",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#3f4a4f",
+      "titleColor": "#253136",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "orient": "bottom"
+    },
+    "title": {
+      "fontSize": 16,
+      "fontWeight": 700,
+      "anchor": "start",
+      "color": "#102026",
+      "subtitleColor": "#526166",
+      "subtitleFontSize": 12
+    },
+    "view": {
+      "stroke": null
+    },
+    "range": {
+      "category": [
+        "#264653",
+        "#2a9d8f",
+        "#e9c46a",
+        "#f4a261",
+        "#e76f51",
+        "#6a4c93",
+        "#277da1",
+        "#43aa8b"
+      ]
+    }
+  },
+  "width": "container",
+  "height": 360,
+  "title": {
+    "text": "Tourism receipts before, during and after disruption",
+    "subtitle": "Indexed to 2019 = 100 to make the scale of the revenue shock and recovery visible."
+  },
+  "data": {
+    "url": "data/tourism_revenue_2015_2024.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "area",
+        "opacity": 0.22,
+        "line": false,
+        "interpolate": "monotone"
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "ordinal",
+          "title": null
+        },
+        "y": {
+          "field": "Index_2019_100",
+          "type": "quantitative",
+          "title": "Revenue index (2019 = 100)"
+        },
+        "color": {
+          "field": "Period",
+          "type": "nominal",
+          "scale": {
+            "range": [
+              "#2a9d8f",
+              "#e76f51",
+              "#264653"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "point": {
+          "filled": true,
+          "size": 80
+        },
+        "strokeWidth": 3,
+        "interpolate": "monotone",
+        "color": "#102026"
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "Index_2019_100",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "Year"
+          },
+          {
+            "field": "Revenue_Billion_USD",
+            "format": "$.2f",
+            "title": "Revenue USD bn"
+          },
+          {
+            "field": "Index_2019_100",
+            "format": ".1f",
+            "title": "Index"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "Year": 2019,
+            "Index": 100,
+            "Label": "2019 baseline"
+          },
+          {
+            "Year": 2021,
+            "Index": 0.3,
+            "Label": "Near-zero receipts"
+          },
+          {
+            "Year": 2024,
+            "Index": 107.4,
+            "Label": "Above 2019 level"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "dy": -8,
+        "fontSize": 11,
+        "fontWeight": 600,
+        "color": "#253136"
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "Index",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "Label"
+        }
+      }
+    }
+  ]
+}

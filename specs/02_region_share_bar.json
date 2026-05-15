@@ -1,0 +1,99 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "background": "transparent",
+    "font": "Inter, Arial, sans-serif",
+    "axis": {
+      "labelColor": "#3f4a4f",
+      "titleColor": "#253136",
+      "gridColor": "#e8ecef",
+      "domainColor": "#ccd3d7",
+      "tickColor": "#ccd3d7",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#3f4a4f",
+      "titleColor": "#253136",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "orient": "bottom"
+    },
+    "title": {
+      "fontSize": 16,
+      "fontWeight": 700,
+      "anchor": "start",
+      "color": "#102026",
+      "subtitleColor": "#526166",
+      "subtitleFontSize": 12
+    },
+    "view": {
+      "stroke": null
+    },
+    "range": {
+      "category": [
+        "#264653",
+        "#2a9d8f",
+        "#e9c46a",
+        "#f4a261",
+        "#e76f51",
+        "#6a4c93",
+        "#277da1",
+        "#43aa8b"
+      ]
+    }
+  },
+  "width": "container",
+  "height": 260,
+  "title": {
+    "text": "Arrivals by world region",
+    "subtitle": "A market-share view separates nearby ASEAN dependence from long-haul growth potential."
+  },
+  "data": {
+    "url": "data/arrivals_by_region.csv"
+  },
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 6
+  },
+  "encoding": {
+    "y": {
+      "field": "Region",
+      "type": "nominal",
+      "sort": "-x",
+      "title": null
+    },
+    "x": {
+      "field": "Arrivals_2025",
+      "type": "quantitative",
+      "title": "2025 arrivals",
+      "axis": {
+        "format": "~s"
+      }
+    },
+    "color": {
+      "field": "Region",
+      "type": "nominal",
+      "legend": null
+    },
+    "tooltip": [
+      {
+        "field": "Region"
+      },
+      {
+        "field": "Arrivals_2025",
+        "format": ","
+      },
+      {
+        "field": "Share_2025",
+        "format": ".1f",
+        "title": "Share %"
+      },
+      {
+        "field": "Growth_2025_vs_2019",
+        "format": "+.1f",
+        "title": "vs 2019 %"
+      }
+    ]
+  }
+}
