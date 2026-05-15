@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Malaysia Tourism: Markets, Capacity and Regional Performance</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+
+<body>
+    <header class="hero">
+        <div class="eyebrow">FIT2179 Data Visualisation 2 · Malaysia tourism dashboard</div>
+        <h1>Malaysia Tourism: Demand, Capacity and Vulnerability</h1>
+        <p class="lede">Visitor markets, hotel capacity and recovery indicators reveal 
+            how Malaysia’s tourism sector is growing and where it remains exposed.</p>
+    </header>
+    <main class="wrap">
+        <section class="kpis">
+            <div class="kpi">
+                <div class="num">26.2M</div>
+                <div class="label">International arrivals in 2025</div>
+            </div>
+            <div class="kpi">
+                <div class="num">65.1%</div>
+                <div class="label">Share from top 3 markets</div>
+            </div>
+            <div class="kpi">
+                <div class="num">349,580</div>
+                <div class="label">Hotel rooms nationwide</div>
+            </div>
+            <div class="kpi">
+                <div class="num">$22.3B</div>
+                <div class="label">Tourism receipts in 2024</div>
+            </div>
+        </section>
+        <section class="section" id="markets">
+            <div class="section-head">
+                <div>
+                    <div class="eyebrow" style="color:#2a9d8f">Section 1</div>
+                    <h2>Where do visitors to Malaysia come from?</h2>
+                    <p>Start with source markets. The first four visuals separate market size, regional concentration,
+                    recovery from 2019 and short-term momentum from 2024 to 2025.</p>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="card span-8">
+                    <div id="vis01" class="chart"></div>
+                </div>
+                <div class="card span-4">
+                    <div id="vis02" class="chart"></div>
+                    <p class="note">Market size alone can hide vulnerability: a strong nearby source base gives volume,
+                        but concentration increases exposure if a few markets slow down.</p>
+                </div>
+                <div class="card span-7">
+                    <div id="vis03" class="chart"></div>
+                </div>
+                <div class="card span-5">
+                    <div id="vis04" class="chart"></div>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="capacity">
+            <div class="section-head">
+                <div>
+                    <div class="eyebrow" style="color:#2a9d8f">Section 2</div>
+                    <h2>Which states are best equipped to support tourism?</h2>
+                </div>
+                <p>Capacity is not just the number of hotels. The dashboard compares physical supply, guest composition,
+                    occupancy tightness and seasonal volatility.</p>
+            </div>
+            <div class="grid">
+                <div class="card span-6">
+                    <div id="vis05" class="chart"></div>
+                </div>
+                <div class="card span-6">
+                    <div id="vis06" class="chart"></div>
+                </div>
+                <div class="card span-6">
+                    <div id="vis07" class="chart"></div>
+                </div>
+                <div class="card span-6">
+                    <div id="vis08" class="chart"></div>
+                </div>
+                <div class="card span-12">
+                    <div id="vis09" class="chart"></div>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="demand">
+            <div class="section-head">
+                <div>
+                    <div class="eyebrow" style="color:#2a9d8f">Section 3</div>
+                    <h2>Which states show the strongest tourism demand?</h2>
+                </div>
+                <p>Demand is normalised by room supply to reveal pressure. This avoids treating large-capacity states as
+                    automatically stronger performers.</p>
+            </div>
+            <div class="grid">
+                <div class="card span-6">
+                    <div id="vis10" class="chart"></div>
+                </div>
+                <div class="card span-6">
+                    <div id="vis11" class="chart"></div>
+                    <p class="note">The pressure index is derived as total hotel guests divided by hotel rooms. It is a
+                        demand-intensity measure, not a direct occupancy measure.</p>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="risk">
+            <div class="section-head">
+                <div>
+                    <div class="eyebrow" style="color:#2a9d8f">Section 4</div>
+                    <h2>How vulnerable is Malaysia’s tourism economy to major disruptions?</h2>
+                </div>
+                <p>The final section links market concentration and state pressure to the receipts shock. It reframes
+                    tourism as a system where growth and risk move together.</p>
+            </div>
+            <div class="grid">
+                <div class="card span-7">
+                    <div id="vis12" class="chart"></div>
+                </div>
+                <div class="card span-5">
+                    <div id="vis13" class="chart"></div>
+                    <p class="note">The deepest disruption reduced receipts by roughly 99.7 index points from the 2019
+                        baseline; recovery by 2024 does not remove future shock exposure.</p>
+                </div>
+            </div>
+        </section>
+        <p class="source">Sources: uploaded assignment datasets; Malaysia state TopoJSON from
+            jnewbery/CartogramMalaysia. Replace author/date metadata before final submission and acknowledge AI
+            assistance if used.</p>
+    </main>
+    <footer class="footer"><strong>Malaysia Tourism Dashboard</strong><br>Single-page Vega-Lite visualisation for
+        FIT2179 Data Visualisation 2. Upload this folder to GitHub Pages and replace placeholder author metadata.
+    </footer>
+    <script src="assets/main.js"></script>
+</body>
+
+</html>
